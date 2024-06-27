@@ -1,0 +1,10 @@
+.nav-link {
+    color: white; /* Cambia el color a tu preferencia */
+  }
+  .nav-link:hover {
+    color: rgb(20, 226, 79); /* Color al pasar el ratón */
+  }
+
+  .sidebar{
+    background-color: #064068;
+  }

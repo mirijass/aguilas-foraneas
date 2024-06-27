@@ -1,2 +1,64 @@
 
-<router-outlet></router-outlet>
+
+<div class="container-fluid" *ngIf="mostrarSidebar">
+    
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a routerLink="/inicio" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a routerLink="/inicio" class="nav-link align-middle px-0">
+                            <mat-icon>home</mat-icon>
+                            <span class="ms-1 d-none d-sm-inline">Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/mapa" class="nav-link px-0 align-middle">
+                            <mat-icon> attach_money</mat-icon>
+                            <span class="ms-1 d-none d-sm-inline">Renta</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <mat-icon>videogame_asset</mat-icon>
+                            <span class="ms-1 d-none d-sm-inline">Entretenimiento</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <mat-icon> fastfood</mat-icon> 
+                            <span class="ms-1 d-none d-sm-inline">Comida</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <mat-icon> directions_bus</mat-icon>
+                            <span class="ms-1 d-none d-sm-inline">Transporte</span> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <mat-icon> local_play</mat-icon>
+                            <span class="ms-1 d-none d-sm-inline">Esparcimiento recreación</span> </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <mat-icon>person</mat-icon>
+                        <span class="d-none d-sm-inline mx-1">Usuario</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" routerLink="/login">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col py-3">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!mostrarSidebar">
+    <router-outlet></router-outlet>
+  </div>
