@@ -1,1 +1,69 @@
-<p>mapa works!</p>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header text-center">
+            <h1>Mapa de rentas</h1>
+          </div>
+
+        <div class="row">
+            <google-map height="400px" width="100%"
+            [center]="center"
+            [zoom]="zoom"
+            (mapClick)="addMarker($event)">
+            <map-marker *ngFor="let markerPosition of markerPositions"
+                [position]="markerPosition"
+                [options]="markerOptions"></map-marker>
+            </google-map>
+        </div>
+
+        <div class="divider d-flex align-items-center my-4 mt-3">
+        </div>
+
+        <div class="row">
+            <div class="col text-end">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Comentarios
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                           
+
+                            @for (item of comentarios; track $index) {
+                                <div>
+                                    {{item}}
+                                </div>
+                                <div class="divider d-flex align-items-center my-4">
+                                </div>
+                            }
+                            
+
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="comentario"></textarea>
+                              </div>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-primary" (click)="agregarComentario()">Comentar</button>
+                        
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
