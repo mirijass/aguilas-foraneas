@@ -12,6 +12,8 @@ import { MapaComponent } from './components/mapa/mapa.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CarrerasComponent } from './components/admin/carreras/carreras.component';
+import { CategoriasComponent } from './components/admin/categorias/categorias.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegistroComponent,
     InicioComponent,
-    MapaComponent
+    MapaComponent,
+    CarrerasComponent,
+    CategoriasComponent
   ],
   imports: [
     BrowserModule,

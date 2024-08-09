@@ -1,4 +1,4 @@
 export interface Carrera{
-    id_carrera:string,
+    id_carrera?:string,
     nombre:string
 }

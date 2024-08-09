@@ -18,13 +18,13 @@
                             <div class="col">
                                                         <!-- Email input -->
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <input id="form1Example13" class="form-control form-control-lg" required/>
+                                    <input id="form1Example13" class="form-control form-control-lg" required [ngModelOptions]="{standalone: true}" [(ngModel)]="usuarioRegistrar.nombre"/>
                                     <label class="form-label" for="form1Example13">Nombre</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <input type="email" id="form1Example13" class="form-control form-control-lg" required/>
+                                    <input type="email" id="form1Example13" class="form-control form-control-lg" required [ngModelOptions]="{standalone: true}" [(ngModel)]="usuarioRegistrar.email" />
                                     <label class="form-label" for="form1Example13">Email</label>
                                 </div>
                             </div>
@@ -32,13 +32,13 @@
                         <div class="row">
                             <div class="col">
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <input type="number" id="form1Example13" class="form-control form-control-lg" required/>
+                                    <input type="number" id="form1Example13" class="form-control form-control-lg" required />
                                     <label class="form-label" for="form1Example13">No. Control</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <input id="form1Example13" class="form-control form-control-lg" required/>
+                                    <input id="form1Example13" class="form-control form-control-lg" required [ngModelOptions]="{standalone: true}" [(ngModel)]="usuarioRegistrar.lugar_origen"/>
                                     <label class="form-label" for="form1Example13">Lugar de origen</label>
                                 </div>
                             </div>
@@ -46,11 +46,12 @@
                         <div class="row">
                             <div class="col">
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" [ngModelOptions]="{standalone: true}" [(ngModel)]="usuarioRegistrar.id_carrera">
                                       <option></option>
-                                      <option value="1">Diseño</option>
-                                      <option value="2">Desarrollo de software</option>
-                                      <option value="3">Redes</option>
+                                      @for (item of carreras; track $index) {
+                                        <option value="{{item.id_carrera}}">{{item.nombre}}</option>
+
+                                      }
                                     </select>
 
                                     <label class="form-label" for="form1Example13">Carrera</label>
@@ -59,7 +60,7 @@
                             </div>
                             <div class="col">
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <input type="number" id="form1Example13" class="form-control form-control-lg"/>
+                                    <input type="number" id="form1Example13" class="form-control form-control-lg" [ngModelOptions]="{standalone: true}" [(ngModel)]="usuarioRegistrar.whatsapp"/>
                                     <label class="form-label" for="form1Example13">Whatsapp</label>
                                 </div>
                             </div>
@@ -68,7 +69,7 @@
                         <div class="row">
                             <div class="col">
                                 <div data-mdb-input-init class="form-floating mb-3">
-                                    <input type="password" id="form1Example13" class="form-control form-control-lg" required/>
+                                    <input type="password" id="form1Example13" class="form-control form-control-lg" [ngModelOptions]="{standalone: true}" [(ngModel)]="usuarioRegistrar.contrasena" required/>
                                     <label class="form-label" for="form1Example13">Contraseña</label>
                                 </div>
                             </div>
@@ -78,12 +79,12 @@
                         <div class="row">
 
                             <div class="col">
-                                <p class="text-muted">¿Ya estas registrado? <a type="button" class="btn btn-link" routerLink="/login">Acceder</a> 
+                                <p class="text-muted">¿Ya estas registrado? <a type="button" class="btn btn-link" routerLink="/login"  >Acceder</a> 
                                 </p>
                             </div>
                             <div class="col text-end">              
                                 <!-- Submit button -->
-                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" routerLink="/inicio">Registrarse</button>
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" (click)="registrarUsuario()">Registrarse</button>
                             </div>
                         </div>
 

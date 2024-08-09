@@ -35,4 +35,8 @@ export class UsuariosService {
   deleteUsuario(idUsuario:number):Observable<Usuario>{
     return this.http.delete<Usuario>(this.urlAdmin+idUsuario+idUsuario, this.httpOptions);
   }
+
+  loginUsuario(usuario:any):Observable<Usuario>{
+    return this.http.post<Usuario>(this.urlAdmin+"login", usuario, this.httpOptions);
+  }
 }

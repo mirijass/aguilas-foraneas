@@ -13,22 +13,22 @@
 
                         <h1 class="text-center"> Iniciar sesión</h1>
 
-                      <form>
+                      <form (ngSubmit)="login()">
                         <!-- Email input -->
                         <div data-mdb-input-init class="form-floating mb-3">
-                          <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                          <label class="form-label" for="form1Example13">No. Control</label>
+                          <input type="email" id="form1Example13" class="form-control form-control-lg" [(ngModel)]="correo" [ngModelOptions]="{standalone: true}"/>
+                          <label class="form-label" for="form1Example13">Correo</label>
                         </div>
               
                         <!-- Password input -->
                         <div data-mdb-input-init class="form-floating mb-3">
-                          <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                          <input type="password" id="form1Example23" class="form-control form-control-lg" [(ngModel)]="password" [ngModelOptions]="{standalone: true}"/>
                           <label class="form-label" for="form1Example23">Contraseña</label>
                         </div>
 
               
                         <!-- Submit button -->
-                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" routerLink="/inicio">Iniciar sesión</button>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">Iniciar sesión</button>
               
                         <div class="divider d-flex align-items-center my-4">
                         </div>

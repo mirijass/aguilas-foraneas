@@ -1,0 +1,69 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col">
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex align-items-center justify-content-center h-100">
+                    
+                    <div class="col-md-10 col-lg-10 col-xl-10 offset-xl-1">
+                        <div>
+                            <h1 class="text-center">Registro de carreras</h1>
+
+                        </div>
+                      <form class="mt-4" (ngSubmit)="guardarCategoria()">
+
+                        <div class="row">
+                            <div class="col">
+                                                        <!-- Email input -->
+                                <div data-mdb-input-init class="form-floating mb-3">
+                                    <input id="form1Example13" class="form-control form-control-lg" required [(ngModel)]="categoriaGuardar.nombre_categoria" [ngModelOptions]="{standalone: true}"/>
+                                    <label class="form-label" for="form1Example13">Nombre</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col text-end">              
+                                <!-- Submit button -->
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" >Registrar</button>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="divider d-flex align-items-center my-4">
+                        </div>
+                          
+                      </form>
+
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre de la carrera</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                            @for (item of categorias; track $index) {
+                                <tr>
+                                    <th scope="row">{{item.id_categoria}}</th>
+                                    <td>{{item.nombre_categoria}}</td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </div>
+    </div>
+    
+</div>

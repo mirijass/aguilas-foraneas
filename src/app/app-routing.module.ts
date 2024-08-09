@@ -4,6 +4,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegistroComponent } from './components/auth/registro/registro.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { MapaComponent } from './components/mapa/mapa.component';
+import { CarrerasComponent } from './components/admin/carreras/carreras.component';
+import { CategoriasComponent } from './components/admin/categorias/categorias.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'mapa',
     component: MapaComponent
+  },
+  {
+    path: 'admin/carreras',
+    component: CarrerasComponent
+  },
+  {
+    path: 'admin/categorias',
+    component: CategoriasComponent
   },
 ];
 
