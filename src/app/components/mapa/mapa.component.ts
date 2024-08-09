@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { LugaresService } from '../../services/lugares.service';
+import { ComentariosService } from '../../services/comentarios.service';
+import { Comentario } from '../../models/comentario';
 
 @Component({
   selector: 'app-mapa',
@@ -7,39 +10,92 @@ import { Component } from '@angular/core';
 })
 export class MapaComponent {
 
-    comentarios:string[]=['Buen internet']
+    comentarios:Comentario[]=[]
     comentario:string='';
 
-  //Solo pruebas
-display: any;
-center: google.maps.LatLngLiteral = {
-    lat: 21.146695311123533,
-    lng: -100.93134946431617
-};
-center2: google.maps.LatLngLiteral = {
-    lat: 22.146695311123533,
-    lng: -100.93134946431617
-};
-zoom = 15;
-moveMap(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.center = (event.latLng.toJSON());
-}
-move(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.display = event.latLng.toJSON();
-}
+    //Solo pruebas
+    display: any;
+    center!: google.maps.LatLngLiteral;   
+    zoom = 15;
 
+    markerOptions: google.maps.MarkerOptions = {
+        draggable: false
+    };
+    markerPositions: google.maps.LatLngLiteral[] = [];
+    
+    constructor(private lugaresServices:LugaresService,
+        private comentariosServcie: ComentariosService
+    ){
 
-markerOptions: google.maps.MarkerOptions = {
-    draggable: false
-};
-markerPositions: google.maps.LatLngLiteral[] = [this.center, this.center2];
-addMarker(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
     }
 
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        this.obtenerLugares();
+        this.obtenerComentarios();
+    }
+
+    obtenerLugares(){
+        this.lugaresServices.getLugares().subscribe({next:response=>{
+            let cordenada:google.maps.LatLngLiteral={
+                lat: parseFloat(response[0].latitud), 
+                lng: parseFloat (response[0].longitud)
+            }
+            console.log(cordenada)
+            this.center= cordenada;
+            response.forEach(element => {
+                let cordenadas:google.maps.LatLngLiteral={
+                    lat: parseFloat(element.latitud), 
+                    lng: parseFloat (element.longitud)
+                }
+                this.markerPositions.push(cordenadas);
+            });
+            console.log(this.markerPositions)
+
+            console.log(response);
+        }});
+
+    }
+
+    obtenerComentarios(){
+        this.comentariosServcie.getComentarios().subscribe({next:respose=>{
+            console.log(respose);
+            this.comentarios= respose;
+        }})
+    }
+
+
+
+
+    moveMap(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.center = (event.latLng.toJSON());
+    }
+    move(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.display = event.latLng.toJSON();
+    }
+
+
+    addMarker(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
+    }
+
+    //Solo tiene datos de prueba
     agregarComentario(){
-        this.comentarios.push(this.comentario);
-        this.comentario='';
+        let comentario:Comentario={
+            aceptado: true,
+            comentario: this.comentario,
+            id_lugar: "1",
+            id_usuario: "1"
+        }
+        this.comentariosServcie.createComentario(comentario).subscribe({next: respose=>{
+            console.log(respose);
+            this.comentario='';
+
+            this.obtenerComentarios();
+            
+        }})
+
     }
 
 }
