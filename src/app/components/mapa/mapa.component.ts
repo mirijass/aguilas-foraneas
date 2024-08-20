@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { LugaresService } from '../../services/lugares.service';
 import { ComentariosService } from '../../services/comentarios.service';
 import { Comentario } from '../../models/comentario';
+import { Lugares } from '../../models/lugar';
+
+import DataTable from 'datatables.net-dt';
+ 
+
+
 
 @Component({
   selector: 'app-mapa',
@@ -12,6 +18,7 @@ export class MapaComponent {
 
     comentarios:Comentario[]=[]
     comentario:string='';
+    lugares:Lugares[]=[];
 
     //Solo pruebas
     display: any;
@@ -26,7 +33,7 @@ export class MapaComponent {
     constructor(private lugaresServices:LugaresService,
         private comentariosServcie: ComentariosService
     ){
-
+        let table = new DataTable('#tabla');
     }
 
     ngOnInit(): void {
@@ -42,7 +49,6 @@ export class MapaComponent {
                 lat: parseFloat(response[0].latitud), 
                 lng: parseFloat (response[0].longitud)
             }
-            console.log(cordenada)
             this.center= cordenada;
             response.forEach(element => {
                 let cordenadas:google.maps.LatLngLiteral={
@@ -51,7 +57,8 @@ export class MapaComponent {
                 }
                 this.markerPositions.push(cordenadas);
             });
-            console.log(this.markerPositions)
+            
+            this.lugares= response;
 
             console.log(response);
         }});
@@ -81,12 +88,15 @@ export class MapaComponent {
     }
 
     //Solo tiene datos de prueba
-    agregarComentario(){
+    agregarComentario(lugar:Lugares){
+        console.log(lugar);
+        let idUsuario=localStorage.getItem('idUsuario');
+        console.log(localStorage.getItem("idUsuario"))
         let comentario:Comentario={
             aceptado: true,
             comentario: this.comentario,
-            id_lugar: "1",
-            id_usuario: "1"
+            id_lugar: lugar.id_lugar,
+            id_usuario: idUsuario!
         }
         this.comentariosServcie.createComentario(comentario).subscribe({next: respose=>{
             console.log(respose);
@@ -96,6 +106,17 @@ export class MapaComponent {
             
         }})
 
+    }
+
+    marcarLugar(lugar:Lugares){
+        console.log(lugar);
+        this.markerPositions=[];
+        let cordenadas:google.maps.LatLngLiteral={
+            lat: parseFloat(lugar.latitud), 
+            lng: parseFloat (lugar.longitud)
+        }
+        this.markerPositions.push(cordenadas);
+        this.center= cordenadas;
     }
 
 }

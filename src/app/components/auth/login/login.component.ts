@@ -29,7 +29,7 @@ export class LoginComponent {
     }
     this.usuarioService.loginUsuario(usuario).subscribe({next: response=>{
       this.router.navigate(['/inicio'])
-
+      localStorage.setItem("idUsuario", response.id_usuario +"")
     }, error: error=>{
       alert("Usuario o contraseña incorrectas")
     }})

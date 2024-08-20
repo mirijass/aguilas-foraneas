@@ -1,26 +1,40 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header text-center">
-            <h1>Mapa de rentas</h1>
+            <h1>Lugares de rentas</h1>
           </div>
-
-        <div class="row">
-            <google-map height="400px" width="100%"
-            [center]="center"
-            [zoom]="zoom"
-            (mapClick)="addMarker($event)">
-            <map-marker *ngFor="let markerPosition of markerPositions"
-                [position]="markerPosition"
-                [options]="markerOptions"></map-marker>
-            </google-map>
-        </div>
-
-        <div class="divider d-flex align-items-center my-4 mt-3">
-        </div>
-
-        <div class="row">
-            <div class="col text-end">
-                <!-- Button trigger modal -->
+        
+          <table class="table table-hover display" id="tabla" >
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Calle</th>
+                <th scope="col">Colonia</th>
+                <th scope="col">Numero interior</th>
+                <th scope="col">Numero exteriror</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Ver en mapa</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                @for (item of lugares; track $index) {
+                    <tr>
+                        <td>{{item.nombre_lugar}}</td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.calle}}</td>
+                        <td>{{item.colonia}}</td>
+                        <td>{{item.no_interior}}</td>
+                        <td>{{item.no_exterior}}</td>
+                        <td>{{item.telefono}}</td>
+                        <td>            
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalMapa" (click)="marcarLugar(item)">
+                                Ver lugar
+                            </button>
+                        </td>
+                        <td>            
+                                            <!-- Button trigger modal -->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Comentarios
                 </button>
@@ -37,9 +51,9 @@
 
                            
 
-                            @for (item of comentarios; track $index) {
+                            @for (comentario of comentarios; track $index) {
                                 <div>
-                                    {{item.comentario}}
+                                    {{comentario.comentario}}
                                 </div>
                                 <div class="divider d-flex align-items-center my-4">
                                 </div>
@@ -55,16 +69,52 @@
                         </div>
                         <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" (click)="agregarComentario()">Comentar</button>
+                                <button type="button" class="btn btn-primary" (click)="agregarComentario(item)">Comentar</button>
                         
                         </div>
                     </div>
                     </div>
                 </div>
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+          </table>
+
+
+
+
+        <div class="divider d-flex align-items-center my-4 mt-3">
+        </div>
+
+        <!-- <div class="row">
+            <div class="col text-end">
+
 
             </div>
 
+        </div> -->
+
+    <!-- <div class="col text-end"> -->
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="modalMapa" tabindex="-1" aria-labelledby="modalMapaLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="row">
+                        <google-map height="400px" width="100%"
+                        [center]="center"
+                        [zoom]="zoom"
+                        (mapClick)="addMarker($event)">
+                        <map-marker *ngFor="let markerPosition of markerPositions"
+                            [position]="markerPosition"
+                            [options]="markerOptions"></map-marker>
+                        </google-map>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    <!-- </div> -->
 </div>
 
