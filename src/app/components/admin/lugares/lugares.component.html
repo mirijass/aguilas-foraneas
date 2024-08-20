@@ -1,0 +1,142 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col">
+            <section class="vh-100">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex align-items-center justify-content-center h-100">
+                    
+                    <div class="col-md-10 col-lg-10 col-xl-10 offset-xl-1">
+                        <div>
+                            <h1 class="text-center">Registro de lugares</h1>
+
+                        </div>
+                      <form class="mt-4" (ngSubmit)="guardarLugar()">
+
+                        <div class="row">
+                            <div class="col">
+                                                        <!-- Email input -->
+                                <div data-mdb-input-init class="form-floating mb-3">
+                                    <input id="form1Example13" class="form-control form-control-lg" required [(ngModel)]="lugarGuardar.nombre_lugar" [ngModelOptions]="{standalone: true}"/>
+                                    <label class="form-label" for="form1Example13">Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                                        <!-- Email input -->
+                                <div data-mdb-input-init class="form-floating mb-3">
+                                    <input id="form1Example13" class="form-control form-control-lg" required [(ngModel)]="lugarGuardar.descripcion" [ngModelOptions]="{standalone: true}"/>
+                                    <label class="form-label" for="form1Example13">Descripción</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                                                      <!-- Email input -->
+                              <div data-mdb-input-init class="form-floating mb-3">
+                                  <input id="form1Example13" class="form-control form-control-lg"  [(ngModel)]="lugarGuardar.calle" [ngModelOptions]="{standalone: true}"/>
+                                  <label class="form-label" for="form1Example13">Calle</label>
+                              </div>
+                          </div>
+                          <div class="col">
+                                                      <!-- Email input -->
+                              <div data-mdb-input-init class="form-floating mb-3">
+                                  <input id="form1Example13" class="form-control form-control-lg"  [(ngModel)]="lugarGuardar.colonia" [ngModelOptions]="{standalone: true}"/>
+                                  <label class="form-label" for="form1Example13">Colonia</label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                                                    <!-- Email input -->
+                            <div data-mdb-input-init class="form-floating mb-3">
+                                <input id="form1Example13" class="form-control form-control-lg"  [(ngModel)]="lugarGuardar.codigo_postal" type="number" [ngModelOptions]="{standalone: true}"/>
+                                <label class="form-label" for="form1Example13">Codigo postal</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                                                    <!-- Email input -->
+                            <div data-mdb-input-init class="form-floating mb-3">
+                                <input id="form1Example13" class="form-control form-control-lg"  [(ngModel)]="lugarGuardar.no_exterior" type="number" [ngModelOptions]="{standalone: true}"/>
+                                <label class="form-label" for="form1Example13">Numero exterior</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                                                  <!-- Email input -->
+                          <div data-mdb-input-init class="form-floating mb-3">
+                              <input id="form1Example13" class="form-control form-control-lg" [(ngModel)]="lugarGuardar.no_interior" type="number" [ngModelOptions]="{standalone: true}"/>
+                              <label class="form-label" for="form1Example13">Numero interior</label>
+                          </div>
+                      </div>
+                      <div class="col">
+                                                  <!-- Email input -->
+                          <div data-mdb-input-init class="form-floating mb-3">
+                              <input id="form1Example13" class="form-control form-control-lg" required [(ngModel)]="lugarGuardar.telefono" [ngModelOptions]="{standalone: true}"/>
+                              <label class="form-label" for="form1Example13">Telefono</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="col">
+                                                <!-- Email input -->
+                        <div data-mdb-input-init class="form-floating mb-3">
+                          <select class="form-control form-control-lg" id="floatingSelect" [(ngModel)]="lugarGuardar.id_categoria" [ngModelOptions]="{standalone: true}" >
+                            <option></option>
+                            @for (item of categorias; track $index) {
+                              <option value="{{item.id_categoria}}">{{item.nombre_categoria}}</option>
+
+                            }
+                          </select>
+
+                          <label class="form-label" for="form1Example13">Categoria</label>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                      <!-- Email input -->
+                      <div data-mdb-input-init class="form-floating mb-3">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalMapa">
+                          Seleccionar cordenadas
+                        </button>
+                      </div>
+                      </div>
+
+                </div>
+
+                        <div class="row">
+
+                            <div class="col text-end">              
+                                <!-- Submit button -->
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block" >Registrar</button>
+                            </div>
+                        </div>
+                          
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </div>
+    </div>
+    
+    <div class="modal fade bd-example-modal-lg" id="modalMapa" tabindex="-1" aria-labelledby="modalMapaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="row">
+                  <google-map height="400px" width="100%"
+                  [center]="center"
+                  [zoom]="zoom"
+                  (mapClick)="addMarker($event)">
+                  <map-marker *ngFor="let markerPosition of markerPositions"
+                      [position]="markerPosition"
+                      [options]="markerOptions"></map-marker>
+                  </google-map>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>

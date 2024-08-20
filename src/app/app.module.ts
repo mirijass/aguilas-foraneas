@@ -14,6 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CarrerasComponent } from './components/admin/carreras/carreras.component';
 import { CategoriasComponent } from './components/admin/categorias/categorias.component';
+import { EntretenimientoComponent } from './components/entretenimiento/entretenimiento.component';
+import { ComidaComponent } from './components/comida/comida.component';
+import { TransporteComponent } from './components/transporte/transporte.component';
+import { LugaresComponent } from './components/admin/lugares/lugares.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { CategoriasComponent } from './components/admin/categorias/categorias.co
     InicioComponent,
     MapaComponent,
     CarrerasComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    EntretenimientoComponent,
+    ComidaComponent,
+    TransporteComponent,
+    LugaresComponent
   ],
   imports: [
     BrowserModule,

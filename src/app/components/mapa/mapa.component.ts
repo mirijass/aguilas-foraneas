@@ -3,8 +3,6 @@ import { LugaresService } from '../../services/lugares.service';
 import { ComentariosService } from '../../services/comentarios.service';
 import { Comentario } from '../../models/comentario';
 import { Lugares } from '../../models/lugar';
-
-import DataTable from 'datatables.net-dt';
  
 
 
@@ -33,7 +31,7 @@ export class MapaComponent {
     constructor(private lugaresServices:LugaresService,
         private comentariosServcie: ComentariosService
     ){
-        let table = new DataTable('#tabla');
+
     }
 
     ngOnInit(): void {
@@ -44,7 +42,7 @@ export class MapaComponent {
     }
 
     obtenerLugares(){
-        this.lugaresServices.getLugares().subscribe({next:response=>{
+        this.lugaresServices.getLugaresRenta().subscribe({next:response=>{
             let cordenada:google.maps.LatLngLiteral={
                 lat: parseFloat(response[0].latitud), 
                 lng: parseFloat (response[0].longitud)

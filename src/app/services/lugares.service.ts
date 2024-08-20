@@ -20,8 +20,17 @@ export class LugaresService {
     return this.http.get<Lugares>(this.urlAdmin+idLugar,this.httpOptions);
   }
 
-  getLugares():Observable<Lugares[]>{
-    return this.http.get<Lugares[]>(this.urlAdmin,this.httpOptions);
+  getLugaresEntretenimiento():Observable<Lugares[]>{
+    return this.http.get<Lugares[]>(this.urlAdmin+'get/entretenimiento',this.httpOptions);
+  }
+  getLugaresComida():Observable<Lugares[]>{
+    return this.http.get<Lugares[]>(this.urlAdmin+'get/comida',this.httpOptions);
+  }
+  getLugaresRenta():Observable<Lugares[]>{
+    return this.http.get<Lugares[]>(this.urlAdmin+'get/renta',this.httpOptions);
+  }
+  getLugaresTransporte():Observable<Lugares[]>{
+    return this.http.get<Lugares[]>(this.urlAdmin+'get/trasporte',this.httpOptions);
   }
 
   createLugare(lugar: Lugares):Observable<Lugares>{
